@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Best Sellers List Page</title>
+    <style>
+      .best_sellers_table {
+        padding: 5px;
+        margin: 5px;
+        border-radius: 8px;
+        border: 1px lightgrey solid;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>
+      Welcome to Today's Best Sellers List (<span
+        data-th-text="${book_list.size()}"
+      ></span
+      >)
+    </h1>
+    <h2>Category: <span data-th-text="${best_seller_category}"></span></h2>
+    <h2>Username: <span data-th-text="${username}"></span></h2>
+
+    <br />
+    <form method="GET" action="/logout">
+      <button type="submit">Logout</button>
+    </form>
+    <br />
+    <form method="GET" action="/best_sellers">
+      <div>
+        <label for="best_seller_category">Category:</label>
+        <select id="best_seller_category" name="best_seller_category">
+          <option value="hardcover-fiction">Hardcover Fiction</option>
+          <option value="hardcover-nonfiction">Hardcover Nonfiction</option>
+          <option value="advice-how-to-and-miscellaneous">
+            Advice How-To and Miscellaneous
+          </option>
+          <option value="picture-books">Picture Books</option>
+          <option value="young-adult-hardcover">Young Adult Hardcover</option>
+          <option value="childrens-middle-grade-hardcover">
+            Childrens Middle Grade Hardcover
+          </option>
+        </select>
+        <button type="submit">Change Category</button>
+      </div>
+    </form>
+    <br />
+
+    <form method="POST" action="/best_sellers">
+      <div>
+        <button type="submit">Save</button>
+        <input
+          type="button"
+          onClick="parent.location='/'"
+          value="Back to Index"
+        />
+      </div>
+
+      <div data-th-each="books :${book_list}" class="best_sellers_table">
+        <table>
+          <tr>
+            <td style="width: 30%">
+              <img data-th-src="@{${books.book_image}}" alt="" />
+            </td>
+            <td>
+              <p>Rank: <strong data-th-text="${books.rank}"></strong></p>
+              <a data-th-href="${books.amazon_product_url}" target="_blank">
+                <h3 data-th-text="${books.title}"></h3>
+              </a>
+
+              <p>Author: <i data-th-text="${books.author}"></i></p>
+
+              <p>Publisher: <i data-th-text="${books.publisher}"></i></p>
+
+              <p>ISBN: <code data-th-text="${books.primary_isbn13}"></code></p>
+
+              <p>
+                Description:<br /><strong
+                  data-th-text="${books.description}"
+                ></strong>
+              </p>
+
+              <a data-th-href="${books.amazon_product_url}" target="_blank">
+                <p>Click here to buy</p>
+              </a>
+
+              <p>
+                Save:
+                <input
+                  type="checkbox"
+                  name="primary_isbn13"
+                  data-th-value="${books.primary_isbn13}"
+                />
+              </p>
+              <input type="hidden" name="primary_isbn13" value="" />
+            </td>
+          </tr>
+        </table>
+      </div>
+    </form>
+  </body>
+</html>

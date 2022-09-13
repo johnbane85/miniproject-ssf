@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Saved Books</title>
+    <style>
+      .book_table {
+        padding: 5px;
+        margin: 5px;
+        border-radius: 8px;
+        border: 1px lightgrey solid;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Your Search Result:</h1>
+    <h2>Username: <span data-th-text="${username}"></span></h2>
+
+    <form method="GET" action="/booksearch" target="_blank">
+      <input
+        id="primary_isbn13"
+        type="text"
+        name="primary_isbn13"
+        size="30"
+        placeholder="Please enter Book ISBN"
+      />
+      <button type="submit">Search Book</button>
+    </form>
+
+    <!-- <form method="GET" action="/best_sellers">
+      <button type="submit">Back to Best Seller list</button>
+      <input
+        type="hidden"
+        name="best_seller_category"
+        value="hardcover-fiction"
+      />
+    </form> -->
+
+    <div data-th-each="book :${book}" class="book_table">
+      <table>
+        <tr>
+          <td style="width: 30%">
+            <img data-th-src="@{${book.book_image}}" alt="" />
+          </td>
+          <td>
+            <p>Rank: <strong data-th-text="${book.rank}"></strong></p>
+            <a data-th-href="${book.amazon_product_url}" target="_blank">
+              <h3 data-th-text="${book.title}"></h3>
+            </a>
+
+            <p>Author: <i data-th-text="${book.author}"></i></p>
+
+            <p>Publisher: <i data-th-text="${book.publisher}"></i></p>
+
+            <p>ISBN: <code data-th-text="${book.primary_isbn13}"></code></p>
+
+            <p>
+              Description:<br /><strong
+                data-th-text="${book.description}"
+              ></strong>
+            </p>
+
+            <a data-th-href="${book.amazon_product_url}" target="_blank">
+              <p>Click here to buy</p>
+            </a>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

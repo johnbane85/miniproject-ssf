@@ -24,7 +24,7 @@ public class AppConfig {
   private String redisPassword;
 
   @Bean("redislab")
-  public RedisTemplate<String, String> initRedisTemplate() {
+  public RedisTemplate<String, Object> initRedisTemplate() {
     // Configure the Redis database
     RedisStandaloneConfiguration redisConfig = new RedisStandaloneConfiguration();
     redisConfig.setHostName(redisHost);
@@ -37,14 +37,13 @@ public class AppConfig {
     JedisClientConfiguration jedisConfig = JedisClientConfiguration.builder().build();
 
     // Create a factory for jedis connection
-    JedisConnectionFactory jedisFac = new JedisConnectionFactory(redisConfig,
-        jedisConfig);
+    JedisConnectionFactory jedisFac = new JedisConnectionFactory(redisConfig, jedisConfig);
     jedisFac.afterPropertiesSet();
 
     // Create RedisTemplate
-    RedisTemplate<String, String> redisTemplate = new RedisTemplate<>();
+    RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
     redisTemplate.setConnectionFactory(jedisFac);
-    // Convert UTF-16 to UTF-8
+    // Convert from UTF-16 to UTF-8
     redisTemplate.setKeySerializer(new StringRedisSerializer());
     redisTemplate.setValueSerializer(new StringRedisSerializer());
 

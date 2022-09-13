@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome</title>
+  </head>
+  <body>
+    <h1>Welcome to Daily Best Seller Book Lists</h1>
+    <h2>Existing User login</h2>
+
+    <form method="POST" action="/userlogin">
+      <label for="username">Username:</label>
+      <input
+        id="username"
+        type="text"
+        name="username"
+        size="30"
+        placeholder="Your username"
+        pattern="[A-Za-z0-9]{3,}"
+        title="Username must contain at least three alphanumeric characters(no special characters or spacings allowed)"
+        required
+      />
+      <br />
+      <br />
+      <label for="password">Password:</label>
+      <input
+        id="password"
+        type="password"
+        name="password"
+        size="30"
+        placeholder="Your password"
+        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).[^\s]{8,}"
+        title="Password must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
+        required
+      />
+      <br />
+      <br />
+      
+      <button type="submit">Login</button>
+      <input
+        type="hidden"
+        name="best_seller_category"
+        value="hardcover-fiction"
+      />
+    </form>
+
+    <h2>Create New User</h2>
+
+    <form method="GET" action="/userlogin">
+      <button type="submit">Create New User</button>
+    </form>
+  </body>
+</html>
