@@ -5,51 +5,80 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Welcome</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+    />
+    <style>
+      .background_color {
+        background-color: #f0f0f0;
+      }
+    </style>
   </head>
-  <body>
-    <h1>Welcome to Daily Best Seller Book Lists</h1>
-    <h2>Existing User login</h2>
+  <body class="background_color p-2">
+    <div class="container text-center bg-success bg-gradient text-white mt-2">
+      <p class="h1 p-2">Welcome to Daily Best Seller Book Lists</p>
+    </div>
 
-    <form method="POST" action="/userlogin">
-      <label for="username">Username:</label>
-      <input
-        id="username"
-        type="text"
-        name="username"
-        size="30"
-        placeholder="Your username"
-        pattern="[A-Za-z0-9]{3,}"
-        title="Username must contain at least three alphanumeric characters(no special characters or spacings allowed)"
-        required
-      />
-      <br />
-      <br />
-      <label for="password">Password:</label>
-      <input
-        id="password"
-        type="password"
-        name="password"
-        size="30"
-        placeholder="Your password"
-        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).[^\s]{8,}"
-        title="Password must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
-        required
-      />
-      <br />
-      <br />
-      
-      <button type="submit">Login</button>
-      <input
-        type="hidden"
-        name="best_seller_category"
-        value="hardcover-fiction"
-      />
-    </form>
+    <div class="container p-2 border border-success rounded mb-2">
+      <div class="row justify-content-center">
+        <div class="col-md-5">
+          <p class="h3">User login</p>
+          <form method="POST" action="/userlogin">
+            <label class="fw-bold" for="username">Username:</label>
+            <input
+              class="form-control"
+              id="username"
+              type="text"
+              name="username"
+              size="30"
+              placeholder="Your username"
+              pattern="[A-Za-z0-9]{3,}"
+              title="Username must contain at least three alphanumeric characters(no special characters or spacings allowed)"
+              required
+            />
+            <br />
 
-    <h2>Create New User</h2>
+            <label class="fw-bold" for="password">Password:</label>
+            <input
+              class="form-control"
+              id="password"
+              type="password"
+              name="password"
+              size="30"
+              placeholder="Your password"
+              pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).[^\s]{8,}"
+              title="Password must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
+              required
+            />
+            <br />
 
-    <form method="GET" action="/userlogin">
-      <button type="submit">Create New User</button>
-    </form>
+            <button class="btn btn-success" type="submit">Login</button>
+            <input
+              type="hidden"
+              name="best_seller_category"
+              value="hardcover-fiction"
+            />
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="container p-2 border border-success rounded mb-2">
+      <div class="row justify-content-center">
+        <div class="col-md-5">
+          <p class="h3">Create New User</p>
+          <br />
+          <form method="GET" action="/userlogin">
+            <button class="btn btn-success" type="submit">
+              Create New User
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
