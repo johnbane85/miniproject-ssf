@@ -28,4 +28,21 @@ public class SavedBooksService {
     return bookRepo.get(primary_isbn13);
   }
 
+  public void savelist(String username, List<Book> toSave) {
+    bookRepo.savelist(username, toSave);
+  }
+
+  public Optional<String> getlist(String username) {
+
+    String result = bookRepo.getlist(username).toString();
+    if (null == result)
+      return Optional.empty();
+
+    return bookRepo.getlist(username);
+  }
+
+  public void delete(String username, String primary_isbn13) {
+    bookRepo.delete(username, primary_isbn13);
+  }
+
 }

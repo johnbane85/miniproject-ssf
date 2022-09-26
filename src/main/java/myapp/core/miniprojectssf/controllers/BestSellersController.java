@@ -73,6 +73,7 @@ public class BestSellersController {
 
     if (toSave.size() > 0) {
       savedBooksSvc.save(toSave);
+      savedBooksSvc.savelist(username, toSave);
     }
 
     String best_seller_category = (String) sess.getAttribute("best_seller_category");
@@ -93,4 +94,5 @@ public class BestSellersController {
   private boolean isNull(String s) {
     return ((null == s) || (s.trim().length() <= 0));
   }
+
 }

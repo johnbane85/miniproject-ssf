@@ -5,101 +5,153 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Best Sellers List Page</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+    />
     <style>
-      .best_sellers_table {
-        padding: 5px;
-        margin: 5px;
-        border-radius: 8px;
-        border: 1px lightgrey solid;
+      .background_color {
+        background-color: #e3f5fd;
       }
     </style>
   </head>
-  <body>
-    <h1>
-      Welcome to Today's Best Sellers List (<span
-        data-th-text="${book_list.size()}"
-      ></span
-      >)
-    </h1>
-    <h2>Category: <span data-th-text="${best_seller_category}"></span></h2>
-    <h2>Username: <span data-th-text="${username}"></span></h2>
+  <body class="background_color">
+    <div class="container mb-3">
+      <p class="h1">
+        Welcome to Today's Best Sellers List (<span
+          data-th-text="${book_list.size()}"
+        ></span
+        >)
+      </p>
+      <p class="h3 text-success">
+        Category: <span data-th-text="${best_seller_category}"></span>
+      </p>
+      <p class="h3 text-primary">
+        Username: <span data-th-text="${username}"></span>
+      </p>
+    </div>
 
-    <br />
-    <form method="GET" action="/logout">
-      <button type="submit">Logout</button>
-    </form>
-    <br />
-    <form method="GET" action="/best_sellers">
-      <div>
-        <label for="best_seller_category">Category:</label>
-        <select id="best_seller_category" name="best_seller_category">
-          <option value="hardcover-fiction">Hardcover Fiction</option>
-          <option value="hardcover-nonfiction">Hardcover Nonfiction</option>
-          <option value="advice-how-to-and-miscellaneous">
-            Advice How-To and Miscellaneous
-          </option>
-          <option value="picture-books">Picture Books</option>
-          <option value="young-adult-hardcover">Young Adult Hardcover</option>
-          <option value="childrens-middle-grade-hardcover">
-            Childrens Middle Grade Hardcover
-          </option>
-        </select>
-        <button type="submit">Change Category</button>
+    <div class="container d-grid gap-2 d-md-flex justify-content-md-end mb-3">
+      <form method="GET" action="/logout">
+        <button class="btn btn-primary" type="submit">Logout</button>
+      </form>
+    </div>
+
+    <div class="container mb-3">
+      <div class="col-md-4">
+        <form method="GET" action="/booksearch" target="_blank">
+          <input
+            class="form-control"
+            id="primary_isbn13"
+            type="text"
+            name="primary_isbn13"
+            size="30"
+            placeholder="Please enter Book ISBN"
+          />
+          <button class="btn btn-primary mt-1" type="submit">
+            Search Book
+          </button>
+        </form>
       </div>
-    </form>
-    <br />
+    </div>
 
-    <form method="POST" action="/best_sellers">
-      <div>
-        <button type="submit">Save</button>
-        <input
-          type="button"
-          onClick="parent.location='/'"
-          value="Back to Index"
-        />
-      </div>
+    <div class="container mb-3">
+      <form method="GET" action="/best_sellers">
+        <div class="col-md-5">
+          <label class="fw-bold mb-1" for="best_seller_category"
+            >Select Category:</label
+          >
+          <select
+            class="form-select"
+            id="best_seller_category"
+            name="best_seller_category"
+          >
+            <option value="hardcover-fiction">Hardcover Fiction</option>
+            <option value="hardcover-nonfiction">Hardcover Nonfiction</option>
+            <option value="advice-how-to-and-miscellaneous">
+              Advice How-To and Miscellaneous
+            </option>
+            <option value="picture-books">Picture Books</option>
+            <option value="young-adult-hardcover">Young Adult Hardcover</option>
+            <option value="childrens-middle-grade-hardcover">
+              Childrens Middle Grade Hardcover
+            </option>
+          </select>
+          <button class="btn btn-primary mt-2" type="submit">
+            Change Category
+          </button>
+        </div>
+      </form>
+    </div>
 
-      <div data-th-each="books :${book_list}" class="best_sellers_table">
-        <table>
-          <tr>
-            <td style="width: 30%">
-              <img data-th-src="@{${books.book_image}}" alt="" />
-            </td>
-            <td>
-              <p>Rank: <strong data-th-text="${books.rank}"></strong></p>
-              <a data-th-href="${books.amazon_product_url}" target="_blank">
-                <h3 data-th-text="${books.title}"></h3>
-              </a>
+    <div class="container mb-2">
+      <form method="GET" action="/favourite">
+        <button class="btn btn-primary" type="submit">Favourite List</button>
+      </form>
+    </div>
 
-              <p>Author: <i data-th-text="${books.author}"></i></p>
+    <div class="container p-3">
+      <form method="POST" action="/best_sellers">
+        <div>
+          <button class="btn btn-primary mb-2" type="submit">Save</button>
+        </div>
 
-              <p>Publisher: <i data-th-text="${books.publisher}"></i></p>
+        <div
+          class="container p-2 border border-success rounded mb-2"
+          data-th-each="books :${book_list}"
+        >
+          <table>
+            <tr>
+              <td style="width: 60%">
+                <div class="p-2">
+                  <img
+                    class="img-fluid rounded"
+                    data-th-src="@{${books.book_image}}"
+                    alt=""
+                  />
+                </div>
+              </td>
+              <td style="max-width: 300px">
+                <p>Rank: <strong data-th-text="${books.rank}"></strong></p>
+                <a data-th-href="${books.amazon_product_url}" target="_blank">
+                  <h3 data-th-text="${books.title}"></h3>
+                </a>
 
-              <p>ISBN: <code data-th-text="${books.primary_isbn13}"></code></p>
+                <p>Author: <i data-th-text="${books.author}"></i></p>
 
-              <p>
-                Description:<br /><strong
-                  data-th-text="${books.description}"
-                ></strong>
-              </p>
+                <p>Publisher: <i data-th-text="${books.publisher}"></i></p>
 
-              <a data-th-href="${books.amazon_product_url}" target="_blank">
-                <p>Click here to buy</p>
-              </a>
+                <p>
+                  ISBN: <code data-th-text="${books.primary_isbn13}"></code>
+                </p>
 
-              <p>
-                Save:
-                <input
-                  type="checkbox"
-                  name="primary_isbn13"
-                  data-th-value="${books.primary_isbn13}"
-                />
-              </p>
-              <input type="hidden" name="primary_isbn13" value="" />
-            </td>
-          </tr>
-        </table>
-      </div>
-    </form>
+                <p>
+                  Description:<br /><strong
+                    data-th-text="${books.description}"
+                  ></strong>
+                </p>
+
+                <a data-th-href="${books.amazon_product_url}" target="_blank">
+                  <p>Click here to buy</p>
+                </a>
+
+                <p>
+                  <b>Save:</b>
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    name="primary_isbn13"
+                    data-th-value="${books.primary_isbn13}"
+                  />
+                </p>
+                <input type="hidden" name="primary_isbn13" value="" />
+              </td>
+            </tr>
+          </table>
+        </div>
+      </form>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>

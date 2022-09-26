@@ -5,10 +5,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>username does not exist</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+    />
+    <style>
+      .background_color {
+        background-color: #f0f0f0;
+      }
+    </style>
   </head>
   <body>
-    <h1>Error! Incorrect Username or Password</h1>
-    <h2>Please try again or contact System Administrator (admin@admin.com)</h2>
-    <input type="button" onClick="parent.location='/'" value="Back to Index" />
+    <div class="container text-center mt-3 text-white">
+      <p class="h1 p-2 bg-info bg-gradient">
+        Error! Incorrect Username or Password
+      </p>
+      <p class="h2 p-2 bg-secondary bg-gradient">
+        Please try again or contact System Administrator (admin@admin.com)
+      </p>
+      <br />
+      <input
+        class="btn btn-success"
+        type="button"
+        onClick="parent.location='/'"
+        value="Back to Index"
+      />
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>

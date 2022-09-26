@@ -35,7 +35,6 @@ public class UserLoginController {
   @Autowired
   private UserService userSvc;
 
-  // Controller for user login
   @PostMapping
   public String postUser(@RequestBody MultiValueMap<String, String> form, Model model, HttpSession sess) {
 
@@ -61,7 +60,6 @@ public class UserLoginController {
 
         sess.setAttribute("username", username);
         model.addAttribute("username", username);
-
         return "best_sellers";
 
       }
@@ -70,15 +68,10 @@ public class UserLoginController {
     return "user_does_not_exist";
   }
 
-  // Direct to create_new_user.html
   @GetMapping
-  public String getUser() {
+  public String getUser(Model model) {
 
     return "create_new_user";
   }
-
-  // private boolean isNull(String s) {
-  // return ((null == s) || (s.trim().length() <= 0));
-  // }
 
 }

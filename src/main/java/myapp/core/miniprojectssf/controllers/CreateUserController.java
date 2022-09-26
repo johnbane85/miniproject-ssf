@@ -66,7 +66,6 @@ public class CreateUserController {
     model.addAttribute("username", username);
 
     return "best_sellers";
-
   }
 
 }

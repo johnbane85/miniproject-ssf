@@ -5,92 +5,137 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Saved Books</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+    />
     <style>
-      .saved_list_table {
-        padding: 5px;
-        margin: 5px;
-        border-radius: 8px;
-        border: 1px lightgrey solid;
+      .background_color {
+        background-color: #e3f5fd;
       }
     </style>
   </head>
-  <body>
-    <h1>
-      Your Saved Books (<span data-th-text="${saved_list.size()}"></span>)
-    </h1>
-    <h2>Category: <span data-th-text="${best_seller_category}"></span></h2>
-    <h2>Username: <span data-th-text="${username}"></span></h2>
+  <body class="background_color">
+    <div class="container mb-3">
+      <p class="h1">
+        Your Saved Books (<span data-th-text="${saved_list.size()}"></span>)
+      </p>
+      <p class="h3 text-success">
+        Category: <span data-th-text="${best_seller_category}"></span>
+      </p>
+      <p class="h3 text-primary">
+        Username: <span data-th-text="${username}"></span>
+      </p>
+    </div>
 
-    <form method="GET" action="/booksearch" target="_blank">
-      <input
-        id="primary_isbn13"
-        type="text"
-        name="primary_isbn13"
-        size="30"
-        placeholder="Please enter Book ISBN"
-      />
-      <button type="submit">Search Book</button>
-    </form>
+    <div class="container d-grid gap-2 d-md-flex justify-content-md-end mb-3">
+      <form method="GET" action="/logout">
+        <button class="btn btn-primary" type="submit">Logout</button>
+      </form>
+    </div>
 
-    <form method="GET" action="/logout">
-      <button type="submit">Logout</button>
-    </form>
-
-    <form method="GET" action="/best_sellers">
-      <button type="submit">Back to Best Seller list</button>
-      <input
-        type="hidden"
-        name="best_seller_category"
-        value="hardcover-fiction"
-      />
-    </form>
-
-    <form method="POST" action="/saved_books">
-      <div>
-        <button type="submit">Save</button>
+    <div class="container mb-3">
+      <div class="col-md-4">
+        <form method="GET" action="/booksearch" target="_blank">
+          <input
+            class="form-control"
+            id="primary_isbn13"
+            type="text"
+            name="primary_isbn13"
+            size="30"
+            placeholder="Please enter Book ISBN"
+          />
+          <button class="btn btn-primary mt-1" type="submit">
+            Search Book
+          </button>
+        </form>
       </div>
-      <br />
-      <div data-th-each="books :${saved_list}" class="saved_list_table">
-        <table>
-          <tr>
-            <td style="width: 30%">
-              <img data-th-src="@{${books.book_image}}" alt="" />
-            </td>
-            <td>
-              <p>Rank: <strong data-th-text="${books.rank}"></strong></p>
-              <a data-th-href="${books.amazon_product_url}" target="_blank">
-                <h3 data-th-text="${books.title}"></h3>
-              </a>
+    </div>
 
-              <p>Author: <i data-th-text="${books.author}"></i></p>
+    <div class="container mb-2">
+      <form method="GET" action="/favourite">
+        <button class="btn btn-primary" type="submit">Favourite List</button>
+      </form>
+    </div>
 
-              <p>Publisher: <i data-th-text="${books.publisher}"></i></p>
+    <div class="container mb-2">
+      <form method="GET" action="/best_sellers">
+        <button class="btn btn-primary" type="submit">
+          Back to Best Seller list
+        </button>
+        <input
+          type="hidden"
+          name="best_seller_category"
+          value="hardcover-fiction"
+        />
+      </form>
+    </div>
 
-              <p>ISBN: <code data-th-text="${books.primary_isbn13}"></code></p>
+    <div class="container p-3">
+      <form method="POST" action="/saved_books">
+        <div>
+          <button class="btn btn-primary mb-2" type="submit">Save</button>
+        </div>
 
-              <p>
-                Description:<br /><strong
-                  data-th-text="${books.description}"
-                ></strong>
-              </p>
+        <div
+          class="container p-2 border border-success rounded mb-2"
+          data-th-each="books :${saved_list}"
+        >
+          <table>
+            <tr>
+              <td style="width: 60%">
+                <div class="p-2">
+                  <img
+                    class="img-fluid rounded"
+                    data-th-src="@{${books.book_image}}"
+                    alt=""
+                  />
+                </div>
+              </td>
+              <td style="max-width: 300px">
+                <p>
+                  Sales Chart Rank:
+                  <strong data-th-text="${books.rank}"></strong>
+                </p>
+                <a data-th-href="${books.amazon_product_url}" target="_blank">
+                  <h3 data-th-text="${books.title}"></h3>
+                </a>
 
-              <a data-th-href="${books.amazon_product_url}" target="_blank">
-                <p>Click here to buy</p>
-              </a>
+                <p>Author: <i data-th-text="${books.author}"></i></p>
 
-              <p>
-                Save:
-                <input
-                  type="checkbox"
-                  name="primary_isbn13"
-                  data-th-value="${books.primary_isbn13}"
-                />
-              </p>
-              <input type="hidden" name="primary_isbn13" value="" />
-            </td>
-          </tr>
-        </table>
-      </div>
-    </form>
+                <p>Publisher: <i data-th-text="${books.publisher}"></i></p>
+
+                <p>
+                  ISBN: <code data-th-text="${books.primary_isbn13}"></code>
+                </p>
+
+                <p>
+                  Description:<br /><strong
+                    data-th-text="${books.description}"
+                  ></strong>
+                </p>
+
+                <a data-th-href="${books.amazon_product_url}" target="_blank">
+                  <p>Click here to buy</p>
+                </a>
+
+                <p>
+                  <b>Save:</b>
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    name="primary_isbn13"
+                    data-th-value="${books.primary_isbn13}"
+                  />
+                </p>
+                <input type="hidden" name="primary_isbn13" value="" />
+              </td>
+            </tr>
+          </table>
+        </div>
+      </form>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>

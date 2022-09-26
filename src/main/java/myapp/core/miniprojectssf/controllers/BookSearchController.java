@@ -37,7 +37,6 @@ public class BookSearchController {
       model.addAttribute("username", username);
       model.addAttribute("book", book);
       return "book_search_result";
-
     }
 
   }
