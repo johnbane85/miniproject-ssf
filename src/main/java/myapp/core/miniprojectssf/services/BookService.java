@@ -52,8 +52,7 @@ public class BookService {
       System.out.println("Getting best seller list from nytimes.com");
 
       String BOOKS_URL = "https://api.nytimes.com/svc/books/v3/lists/" +
-          date
-          + "/" + best_seller_category + ".json";
+          date + "/" + best_seller_category + ".json";
 
       String url = UriComponentsBuilder
           .fromHttpUrl(BOOKS_URL)

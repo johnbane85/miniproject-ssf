@@ -95,8 +95,8 @@ public class Book {
     return book;
   }
 
-  public static Book create(String json) {
-    try (StringReader strReader = new StringReader(json)) {
+  public static Book create(String jsonStr) {
+    try (StringReader strReader = new StringReader(jsonStr)) {
       JsonReader j = Json.createReader(strReader);
       return create(j.readObject());
     }

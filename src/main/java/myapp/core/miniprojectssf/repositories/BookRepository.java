@@ -37,8 +37,23 @@ public class BookRepository {
       map.put(book.getPrimary_isbn13(), book.toJson().toString());
     redisTemplate.opsForValue().multiSet(map);
 
-    for (String primary_isbn13 : map.keySet())
-      redisTemplate.expire(primary_isbn13, Duration.ofMinutes(cacheTime));
+    for (String key : map.keySet())
+      redisTemplate.expire(key, Duration.ofMinutes(cacheTime));
+  }
+
+  public Optional<Book> get(String primary_isbn13) {
+    if (!redisTemplate.hasKey(primary_isbn13))
+      return Optional.empty();
+    String data = redisTemplate.opsForValue().get(primary_isbn13).toString();
+    return Optional.of(Book.create(data));
+  }
+
+  public Optional<String> getlist(String username) {
+
+    if (!redisTemplate.hasKey(username + "_favList"))
+      return Optional.empty();
+    String data = redisTemplate.opsForValue().get(username + "_favList").toString();
+    return Optional.of(data);
   }
 
   public void savelist(String username, List<Book> book_list) {
@@ -62,24 +77,8 @@ public class BookRepository {
       map.put(book.getPrimary_isbn13(), book.toJson().toString());
     }
 
-    JSONObject json = new JSONObject(map);
-    redisTemplate.opsForValue().set(username + "_favList", json.toString(), Duration.ofMinutes(cacheTime));
-
-  }
-
-  public Optional<String> getlist(String username) {
-
-    if (!redisTemplate.hasKey(username + "_favList"))
-      return Optional.empty();
-    String data = redisTemplate.opsForValue().get(username + "_favList").toString();
-    return Optional.of(data);
-  }
-
-  public Optional<Book> get(String primary_isbn13) {
-    if (!redisTemplate.hasKey(primary_isbn13))
-      return Optional.empty();
-    String data = redisTemplate.opsForValue().get(primary_isbn13).toString();
-    return Optional.of(Book.create(data));
+    JSONObject jsonObj = new JSONObject(map);
+    redisTemplate.opsForValue().set(username + "_favList", jsonObj.toString(), Duration.ofMinutes(cacheTime));
   }
 
   public void delete(String username, String primary_isbn13) {
@@ -99,8 +98,8 @@ public class BookRepository {
 
     map.remove(primary_isbn13);
 
-    JSONObject json = new JSONObject(map);
-    redisTemplate.opsForValue().set(username + "_favList", json.toString(), Duration.ofMinutes(cacheTime));
+    JSONObject jsonObj = new JSONObject(map);
+    redisTemplate.opsForValue().set(username + "_favList", jsonObj.toString(), Duration.ofMinutes(cacheTime));
   }
 
 }

@@ -36,18 +36,18 @@ public class User {
     this.email = email;
   }
 
-  public static User create(String jsonStr) {
-    StringReader reader = new StringReader(jsonStr);
-    JsonReader r = Json.createReader(reader);
-    return create(r.readObject());
-  }
-
   public static User create(JsonObject jo) {
     User user = new User();
     user.setUsername(jo.getString("username"));
     user.setPassword(jo.getString("password"));
     user.setEmail(jo.getString("email"));
     return user;
+  }
+
+  public static User create(String jsonStr) {
+    StringReader reader = new StringReader(jsonStr);
+    JsonReader r = Json.createReader(reader);
+    return create(r.readObject());
   }
 
   public JsonObject toJson() {

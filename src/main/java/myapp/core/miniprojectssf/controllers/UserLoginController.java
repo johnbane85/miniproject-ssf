@@ -69,7 +69,7 @@ public class UserLoginController {
   }
 
   @GetMapping
-  public String getUser(Model model) {
+  public String getUser() {
 
     return "create_new_user";
   }

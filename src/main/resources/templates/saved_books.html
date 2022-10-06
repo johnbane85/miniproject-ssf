@@ -79,7 +79,7 @@
 
         <div
           class="container p-2 border border-success rounded mb-2"
-          data-th-each="books :${saved_list}"
+          data-th-each="book :${saved_list}"
         >
           <table>
             <tr>
@@ -87,35 +87,33 @@
                 <div class="p-2">
                   <img
                     class="img-fluid rounded"
-                    data-th-src="@{${books.book_image}}"
+                    data-th-src="@{${book.book_image}}"
                     alt=""
                   />
                 </div>
               </td>
               <td style="max-width: 300px">
                 <p>
-                  Sales Chart Rank:
-                  <strong data-th-text="${books.rank}"></strong>
+                  Rank:
+                  <strong data-th-text="${book.rank}"></strong>
                 </p>
-                <a data-th-href="${books.amazon_product_url}" target="_blank">
-                  <h3 data-th-text="${books.title}"></h3>
+                <a data-th-href="${book.amazon_product_url}" target="_blank">
+                  <h3 data-th-text="${book.title}"></h3>
                 </a>
 
-                <p>Author: <i data-th-text="${books.author}"></i></p>
+                <p>Author: <i data-th-text="${book.author}"></i></p>
 
-                <p>Publisher: <i data-th-text="${books.publisher}"></i></p>
+                <p>Publisher: <i data-th-text="${book.publisher}"></i></p>
 
-                <p>
-                  ISBN: <code data-th-text="${books.primary_isbn13}"></code>
-                </p>
+                <p>ISBN: <code data-th-text="${book.primary_isbn13}"></code></p>
 
                 <p>
                   Description:<br /><strong
-                    data-th-text="${books.description}"
+                    data-th-text="${book.description}"
                   ></strong>
                 </p>
 
-                <a data-th-href="${books.amazon_product_url}" target="_blank">
+                <a data-th-href="${book.amazon_product_url}" target="_blank">
                   <p>Click here to buy</p>
                 </a>
 
@@ -125,7 +123,7 @@
                     class="form-check-input"
                     type="checkbox"
                     name="primary_isbn13"
-                    data-th-value="${books.primary_isbn13}"
+                    data-th-value="${book.primary_isbn13}"
                   />
                 </p>
                 <input type="hidden" name="primary_isbn13" value="" />
