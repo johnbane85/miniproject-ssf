@@ -16,7 +16,7 @@
     </style>
   </head>
   <body class="background_color">
-    <div class="container mb-3">
+    <div class="container mb-2">
       <p class="h1">
         Welcome to Today's Best Sellers List (<span
           data-th-text="${book_list.size()}"
@@ -37,63 +37,72 @@
       </form>
     </div>
 
-    <div class="container mb-3">
-      <div class="col-md-4">
-        <form method="GET" action="/booksearch" target="_blank">
-          <input
-            class="form-control"
-            id="primary_isbn13"
-            type="text"
-            name="primary_isbn13"
-            size="30"
-            placeholder="Please enter Book ISBN"
-          />
-          <button class="btn btn-primary mt-1" type="submit">
-            Search Book
-          </button>
-        </form>
-      </div>
-    </div>
-
-    <div class="container mb-3">
-      <form method="GET" action="/best_sellers">
-        <div class="col-md-5">
-          <label class="fw-bold mb-1" for="best_seller_category"
-            >Select Category:</label
-          >
-          <select
-            class="form-select"
-            id="best_seller_category"
-            name="best_seller_category"
-          >
-            <option value="hardcover-fiction">Hardcover Fiction</option>
-            <option value="hardcover-nonfiction">Hardcover Nonfiction</option>
-            <option value="advice-how-to-and-miscellaneous">
-              Advice How-To and Miscellaneous
-            </option>
-            <option value="picture-books">Picture Books</option>
-            <option value="young-adult-hardcover">Young Adult Hardcover</option>
-            <option value="childrens-middle-grade-hardcover">
-              Childrens Middle Grade Hardcover
-            </option>
-          </select>
-          <button class="btn btn-primary mt-2" type="submit">
-            Change Category
-          </button>
+    <div class="container mb-2">
+      <form method="GET" action="/booksearch" target="_blank">
+        <div class="row gx-2">
+          <div class="col-md-4 mb-2">
+            <input
+              class="form-control"
+              id="primary_isbn13"
+              type="text"
+              name="primary_isbn13"
+              size="30"
+              placeholder="Please enter Book ISBN"
+            />
+          </div>
+          <div class="col-md-3 mb-2">
+            <button class="btn btn-primary" type="submit">Search Book</button>
+          </div>
         </div>
       </form>
     </div>
 
-    <div class="container mb-2">
-      <form method="GET" action="/favourite">
-        <button class="btn btn-primary" type="submit">Favourite List</button>
+    <div class="container mb-3">
+      <form method="GET" action="/best_sellers">
+        <div class="row gx-2 gy-2">
+          <div class="col-md-4">
+            <select
+              class="form-select"
+              id="best_seller_category"
+              name="best_seller_category"
+            >
+              <option value="hardcover-fiction">Hardcover Fiction</option>
+              <option value="hardcover-nonfiction">Hardcover Nonfiction</option>
+              <option value="advice-how-to-and-miscellaneous">
+                Advice How-To and Miscellaneous
+              </option>
+              <option value="picture-books">Picture Books</option>
+              <option value="young-adult-hardcover">
+                Young Adult Hardcover
+              </option>
+              <option value="childrens-middle-grade-hardcover">
+                Childrens Middle Grade Hardcover
+              </option>
+            </select>
+          </div>
+          <div class="col-md-3">
+            <button class="btn btn-primary" type="submit">
+              Change Category
+            </button>
+          </div>
+        </div>
       </form>
+    </div>
+
+    <div class="container">
+      <div class="col-md-4">
+        <form method="GET" action="/favourite">
+          <button class="btn btn-primary" type="submit">Favourite List</button>
+        </form>
+      </div>
     </div>
 
     <div class="container p-3">
       <form method="POST" action="/best_sellers">
         <div>
-          <button class="btn btn-primary mb-2" type="submit">Save</button>
+          <button class="btn btn-primary mb-2" type="submit">
+            Save to Favourite
+          </button>
         </div>
 
         <div

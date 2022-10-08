@@ -25,9 +25,9 @@
         <div class="col-md-5">
           <p class="h3">User login</p>
           <form method="POST" action="/userlogin">
-            <label class="fw-bold" for="username">Username:</label>
+            <label class="fw-bold mb-1" for="username">Username:</label>
             <input
-              class="form-control"
+              class="form-control mb-2"
               id="username"
               type="text"
               name="username"
@@ -37,11 +37,10 @@
               title="Username must contain at least three alphanumeric characters(no special characters or spacings allowed)"
               required
             />
-            <br />
 
-            <label class="fw-bold" for="password">Password:</label>
+            <label class="fw-bold mb-1" for="password">Password:</label>
             <input
-              class="form-control"
+              class="form-control mb-2"
               id="password"
               type="password"
               name="password"
@@ -51,7 +50,6 @@
               title="Password must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
               required
             />
-            <br />
 
             <button class="btn btn-success" type="submit">Login</button>
             <input
@@ -68,9 +66,9 @@
       <div class="row justify-content-center">
         <div class="col-md-5">
           <p class="h3">Create New User</p>
-          <br />
+
           <form method="GET" action="/userlogin">
-            <button class="btn btn-success" type="submit">
+            <button class="btn btn-success mt-1" type="submit">
               Create New User
             </button>
           </form>
