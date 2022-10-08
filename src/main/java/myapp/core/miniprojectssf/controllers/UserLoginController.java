@@ -35,7 +35,7 @@ public class UserLoginController {
   @Autowired
   private UserService userSvc;
 
-  @PostMapping
+  @PostMapping(consumes = "application/x-www-form-urlencoded", produces = "text/html")
   public String postUser(@RequestBody MultiValueMap<String, String> form, Model model, HttpSession sess) {
 
     String username = form.getFirst("username");

@@ -36,7 +36,7 @@ public class CreateUserController {
   @Autowired
   private BookService bookSvc;
 
-  @PostMapping
+  @PostMapping(consumes = "application/x-www-form-urlencoded", produces = "text/html")
   public String postUser(@RequestBody MultiValueMap<String, String> form, Model model, HttpSession sess) {
 
     String username = form.getFirst("username");

@@ -29,7 +29,7 @@ public class BestSellersController {
   @Autowired
   private SavedBooksService savedBooksSvc;
 
-  // Controlls Change Category selector and button
+  // Controlls Change Category selector
   @GetMapping
   public String getBooks(@RequestParam String best_seller_category, Model model, HttpSession sess) {
 
@@ -49,8 +49,8 @@ public class BestSellersController {
     return "best_sellers";
   }
 
-  // Controlls Save button
-  @PostMapping
+  // Controlls Save to Favourite
+  @PostMapping(consumes = "application/x-www-form-urlencoded", produces = "text/html")
   public String postBooks(@RequestBody MultiValueMap<String, String> form, Model model, HttpSession sess) {
 
     String username = (String) sess.getAttribute("username");

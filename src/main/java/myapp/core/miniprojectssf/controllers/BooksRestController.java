@@ -24,7 +24,7 @@ public class BooksRestController {
   @Autowired
   private SavedBooksService savedBooksSvc;
 
-  // GET REST Endpoint for ISBN13
+  // GET REST Endpoint for ISBN13 as PathVariable
   @GetMapping(path = "{primary_isbn13}")
   public ResponseEntity<String> getBooks(@PathVariable(name = "primary_isbn13") String primary_isbn13) {
     Optional<Book> opt = savedBooksSvc.get(primary_isbn13);
